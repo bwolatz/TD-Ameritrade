@@ -11,7 +11,8 @@ import { ImageDetailComponent } from './image-detail/image-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ImagesComponent
+    ImagesComponent,
+    ImageDetailComponent
   ],
   imports: [
     BrowserModule,
