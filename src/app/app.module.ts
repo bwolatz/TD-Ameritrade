@@ -15,6 +15,9 @@ import { ShareService } from './share.service';
     BrowserModule,
     FormsModule,
     HttpModule/*,
+    
+    Commented out until routing can be achieved while persisting data
+    
     RouterModule.forRoot([
         {
             path: 'images/:id',

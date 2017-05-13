@@ -10,18 +10,20 @@ import { ShareService } from './share.service';
   styleUrls: ['./app.component.css']  
 })
 export class AppComponent {
+    // shared service for cross-component sharing of variable data
     constructor(private shareService: ShareService) {}
     
+    // component level variables
     orientationToShow: any = {};
     error: string = "";
     username: string;
     usercomment: string;
-    
     imageIdToShow: number = 0;
     imageToShow: Image;
     
+    // file upload process. use a html file input, retrieve the files when more are added
+    // open a file reader object, read the data. the `onload` accepts a promise once all the data is loaded.
     @ViewChild('inp') element: ElementRef;
-    
     upload() {
         var files = this.element.nativeElement.files;
         for (var i = 0; i < files.length; i++) {
@@ -36,6 +38,8 @@ export class AppComponent {
         }
     }
     
+    // simple linear search to find which image was selected (in the thumbnail section),
+    // assign the component-level variables appropriately
     bringToTop(selectedId) {
         for (var j = 0; j < this.shareService.imageArray.length; j++) {
             if (this.shareService.imageArray[j].id == selectedId) {
@@ -48,11 +52,14 @@ export class AppComponent {
         this.error = "";
     }
     
+    // sets component-level variables to hide the top section
     hideTop() {
         this.imageIdToShow = 0;
         this.error = "";
     }
     
+    // saves a comment based on the values in the input boxes.
+    // does basic form validation and date formatting.
     addComment() {
         if (this.username.length <= 0) {
             this.error = "Enter a username to leave a comment.";
@@ -69,12 +76,14 @@ export class AppComponent {
         }
     }
     
+    // add 90 degrees to the property of the Image object
     rotateNinetyDegrees() {
         let num = parseInt(this.imageToShow.orientation);
         this.imageToShow.orientation = ((num + 90) % 360) + 'deg';
         this.calcOrientationStyle();
     }
     
+    // cross-browser support for image orientation/rotation functionality
     calcOrientationStyle() {
         this.orientationToShow = {
             "-ms-transform": "rotate(" + this.imageToShow.orientation + ")", /* IE 9 */

@@ -1,3 +1,4 @@
+// Comment class. could have potentially calculated the timestamp in the constructor
 class Comment {
     public timestamp: string;
     public text: string;

@@ -1,5 +1,6 @@
 import { Comment } from "./comment";
 
+// class of Image. holds essential properties, such as source data and filename
 class Image {
     public comments: Comment[] = new Array();
     public id: number;
