@@ -1,6 +1,43 @@
 <h1>
   {{title}}
 </h1>
-<a routerLink="/images">Images</a>
-<a routerLink="/images/1">Image Detail</a>
-<router-outlet></router-outlet>
+<br>
+<br>
+
+<h3>{{error}}</h3>
+
+<div *ngIf="imageIdToShow > 0">
+    <img class="notTooBig" [ngStyle]="orientationToShow" [attr.src]="imageToShow .source">
+    <button (click)="rotateNinetyDegrees()">Rotate 90 Degrees</button>
+    <br>
+    Make a comment on {{imageToShow.filename}}:
+    <br>
+    User Name: <input type="text" [(ngModel)]="username">
+    <br>
+    Comment: <input type="textarea" [(ngModel)]="usercomment">
+    <br>
+    <button (click)="addComment()">Add Comment</button>
+    <br>
+    Previous Comments:
+    <div *ngFor="let cmnt of imageToShow.comments">
+        On {{cmnt.timestamp}}, {{cmnt.username}} said: {{cmnt.text}}
+        <br>
+    </div>
+    <br>
+    <button (click)="hideTop()">Hide Top Section</button>
+</div>
+    
+
+<br>
+<br>
+
+<div *ngFor="let image of shareService.imageArray">
+    <img [ngClass]="{'thumbn':true, 'highlighted': image.id==imageIdToShow}" [attr.src]="image .source" (click)="bringToTop(image.id)"/>
+    <br>
+    <div [ngClass]="{'highlighted': image.id==imageIdToShow}">{{image.filename}}</div>
+</div>
+
+<br>
+<br>
+
+<input #inp (change)="upload()" type="file" name="pic" accept="image/*" multiple>

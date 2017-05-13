@@ -5,31 +5,24 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { ImagesComponent } from './images/images.component';
-import { ImageDetailComponent } from './image-detail/image-detail.component';
+import { ShareService } from './share.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ImagesComponent,
-    ImageDetailComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
+    HttpModule/*,
     RouterModule.forRoot([
-        {
-            path: 'images',
-            component: ImagesComponent
-        },
         {
             path: 'images/:id',
             component: ImageDetailComponent
         }
-    ])
+    ])*/
   ],
-  providers: [],
+  providers: [ShareService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
